@@ -1,17 +1,20 @@
-user1 = int(input("Enter the first number: "))
-user2 = int(input("Enter the second number: "))
-choice = input("Choose the operation (+, -, *, /): ")
+# match_case_calculator.py
 
-if choice == "+":
-    print(f"The result is {user1 + user2}")
-elif choice == "-":
-    print(f"The result is {user1 - user2}")
-elif choice == "/":
-    if user2 == 0:
-        print("Cannot divide by zero")
-    else:
-        print(f"The result is {user1 / user2}")
-elif choice == "*":
-    print(f"The result is {user1 * user2}")
-else:
-    print("Invalid operation. Please choose +, -, *, or /.")
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+operation = input("Choose the operation (+, -, *, /): ")
+
+match operation:
+    case "+":
+        print(f"The result is {num1 + num2}")
+    case "-":
+        print(f"The result is {num1 - num2}")
+    case "*":
+        print(f"The result is {num1 * num2}")
+    case "/":
+        if num2 == 0:
+            print("Cannot divide by zero.")
+        else:
+            print(f"The result is {num1 / num2}")
+    case _:
+        print("Invalid operation. Please choose one of (+, -, *, /).")
