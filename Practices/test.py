@@ -1,40 +1,25 @@
-# # count = 100
-# # while count > 0:
-# #     print("Countdown:", count)
-# #     count -= 1
-# # print("Blast off!")
-# # age=0
-# #
-# # while age<18:
-# #    int((input("enter your age")))
-# # print("you are old enough")
-# #
-# # secret_number=5
-# #
-# # guess=0
-# # count=0
-# #
-# # while guess!=secret_number:
-# #       count+=1
-# #       guess= int(input("enter your guess"))
-# # print(f"you found the number in {count
-# # } trys")
-#
-# items = ["apple", "mango", "banana"]
-#
-# while True:
-#     user = input("Enter the item: ")
-#     if user in items:
-#         print("You got the item!")
-#         break
-#     else:
-#         print("Item not found. Try again.")
+# Problem:
+# Write a Python function that takes a list of
+# integers and a target sum. The function should return
+# all unique pairs of numbers from the list that add up to the target sum.
 
+def find_pairs(nums, target):
+    seen = set()
+    pairs = set()
 
-row=7
+    for num in nums:
+        complement = target - num
+        if complement in seen:
+            # Add pairs with smaller number first to avoid duplicates
+            pair = tuple(sorted((num, complement)))
+            pairs.add(pair)
+        seen.add(num)
 
-for i in range(0,row):
-    for j in range(0,i+4):
-        print("*",end="")
-    print()
+    return list(pairs)
 
+# Test
+input_list = [1, 2, 3, 2, 4, 5, 0, -1, 4]
+target_sum = 4
+
+result = find_pairs(input_list, target_sum)
+print(result)
