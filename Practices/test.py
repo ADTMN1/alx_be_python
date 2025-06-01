@@ -60,35 +60,75 @@
 #
 # Note: The solution set must not contain duplicate triplets.
 
-def three_sum(nums):
-    nums.sort()
-    result = []
+# def three_sum(nums):
+#     nums.sort()
+#     result = []
+#
+#     for i in range(len(nums)):
+#         if i > 0 and nums[i] == nums[i - 1]:
+#             continue
+#
+#         left, right = i + 1, len(nums) - 1
+#
+#         while left < right:
+#             total = nums[i] + nums[left] + nums[right]
+#
+#             if total < 0:
+#                 left += 1
+#             elif total > 0:
+#                 right -= 1
+#             else:
+#                 result.append([nums[i], nums[left], nums[right]])
+#
+#                 while left < right and nums[left] == nums[left + 1]:
+#                     left += 1
+#                 while left < right and nums[right] == nums[right - 1]:
+#                     right -= 1
+#
+#                 left += 1
+#                 right -= 1
+#
+#     return result
+#
+# # Function call with output
+# print(three_sum([-1, 0, 1, 2, -1, -4]))
 
-    for i in range(len(nums)):
-        if i > 0 and nums[i] == nums[i - 1]:
-            continue
 
-        left, right = i + 1, len(nums) - 1
 
-        while left < right:
-            total = nums[i] + nums[left] + nums[right]
+#  Problem:
+# Given two strings s1 and s2, return True if s2 contains a permutation of s1, or False otherwise.
+#
+# In other words, one of s1's permutations is a substring of s2.
 
-            if total < 0:
-                left += 1
-            elif total > 0:
-                right -= 1
-            else:
-                result.append([nums[i], nums[left], nums[right]])
 
-                while left < right and nums[left] == nums[left + 1]:
-                    left += 1
-                while left < right and nums[right] == nums[right - 1]:
-                    right -= 1
+from collections import Counter
 
-                left += 1
-                right -= 1
+def check_inclusion(s1, s2):
+    len1, len2 = len(s1), len(s2)
+    if len1 > len2:
+        return False
 
-    return result
+    s1_count = Counter(s1)
+    window_count = Counter(s2[:len1])
 
-# Function call with output
-print(three_sum([-1, 0, 1, 2, -1, -4]))
+    if s1_count == window_count:
+        return True
+
+    for i in range(len1, len2):
+        start_char = s2[i - len1]
+        new_char = s2[i]
+
+        window_count[new_char] += 1
+        window_count[start_char] -= 1
+
+        if window_count[start_char] == 0:
+            del window_count[start_char]
+
+        if window_count == s1_count:
+            return True
+
+    return False
+
+#  Call the function and print the result
+print(check_inclusion("ab", "eidbaooo"))  # Expected: True
+print(check_inclusion("ab", "eidboaoo"))  # Expected: False
