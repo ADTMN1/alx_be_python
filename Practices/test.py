@@ -151,21 +151,50 @@
 #     print("Subarrays with XOR 6:", result)
 
 # problem: Group Anagrams
+#
+# def group_anagrams(strs):
+#     from collections import defaultdict
+#     anagram_map = defaultdict(list)
+#
+#     for s in strs:
+#         key = tuple(sorted(s))
+#         print(f"Processing word: '{s}' -> key: {key}")
+#         anagram_map[key].append(s)
+#         print(f"Current anagram groups: {dict(anagram_map)}")
+#
+#     result = list(anagram_map.values())
+#     print(f"Final grouped anagrams: {result}")
+#     return result
 
-def group_anagrams(strs):
-    from collections import defaultdict
-    anagram_map = defaultdict(list)
+def spiral_order(matrix):
+    res = []
+    while matrix:
+        # Take and remove the first row
+        res += matrix.pop(0)
 
-    for s in strs:
-        key = tuple(sorted(s))
-        print(f"Processing word: '{s}' -> key: {key}")
-        anagram_map[key].append(s)
-        print(f"Current anagram groups: {dict(anagram_map)}")
+        # Take the last element of each remaining row
+        if matrix and matrix[0]:
+            for row in matrix:
+                res.append(row.pop())
 
-    result = list(anagram_map.values())
-    print(f"Final grouped anagrams: {result}")
-    return result
+        # Take and remove the last row in reverse order
+        if matrix:
+            res += matrix.pop()[::-1]
 
+        # Take the first element of each remaining row, bottom to top
+        if matrix and matrix[0]:
+            for row in matrix[::-1]:
+                res.append(row.pop(0))
+    return res
 
 if __name__ == "__main__":
-    group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+    matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ]
+    result = spiral_order(matrix)
+    print("Spiral order traversal:", result)
+
+
+
