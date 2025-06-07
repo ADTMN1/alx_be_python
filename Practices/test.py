@@ -166,35 +166,52 @@
 #     print(f"Final grouped anagrams: {result}")
 #     return result
 
-def spiral_order(matrix):
-    res = []
-    while matrix:
-        # Take and remove the first row
-        res += matrix.pop(0)
+# problem : spiral traversal output
+#
+# def spiral_order(matrix):
+#     res = []
+#     while matrix:
+#         # Take and remove the first row
+#         res += matrix.pop(0)
+#
+#         # Take the last element of each remaining row
+#         if matrix and matrix[0]:
+#             for row in matrix:
+#                 res.append(row.pop())
+#
+#         # Take and remove the last row in reverse order
+#         if matrix:
+#             res += matrix.pop()[::-1]
+#
+#         # Take the first element of each remaining row, bottom to top
+#         if matrix and matrix[0]:
+#             for row in matrix[::-1]:
+#                 res.append(row.pop(0))
+#     return res
+#
+# if __name__ == "__main__":
+#     matrix = [
+#         [1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]
+#     ]
+#     result = spiral_order(matrix)
+#     print("Spiral order traversal:", result)
 
-        # Take the last element of each remaining row
-        if matrix and matrix[0]:
-            for row in matrix:
-                res.append(row.pop())
+# Given a string s containing just the
+# characters ()[]{}, determine if the input is valid.
+def is_valid_parentheses(s):
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+    for char in s:
+        if char in mapping.values():
+            stack.append(char)
+        elif char in mapping:
+            if not stack or stack.pop() != mapping[char]:
+                return False
+    return not stack
 
-        # Take and remove the last row in reverse order
-        if matrix:
-            res += matrix.pop()[::-1]
-
-        # Take the first element of each remaining row, bottom to top
-        if matrix and matrix[0]:
-            for row in matrix[::-1]:
-                res.append(row.pop(0))
-    return res
-
-if __name__ == "__main__":
-    matrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
-    ]
-    result = spiral_order(matrix)
-    print("Spiral order traversal:", result)
+print("Valid Parentheses:", is_valid_parentheses("({[]})"))  # True
 
 
 
