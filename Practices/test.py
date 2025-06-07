@@ -200,18 +200,29 @@
 
 # Given a string s containing just the
 # characters ()[]{}, determine if the input is valid.
-def is_valid_parentheses(s):
-    stack = []
-    mapping = {')': '(', '}': '{', ']': '['}
-    for char in s:
-        if char in mapping.values():
-            stack.append(char)
-        elif char in mapping:
-            if not stack or stack.pop() != mapping[char]:
-                return False
-    return not stack
+# def is_valid_parentheses(s):
+#     stack = []
+#     mapping = {')': '(', '}': '{', ']': '['}
+#     for char in s:
+#         if char in mapping.values():
+#             stack.append(char)
+#         elif char in mapping:
+#             if not stack or stack.pop() != mapping[char]:
+#                 return False
+#     return not stack
+#
+# print("Valid Parentheses:", is_valid_parentheses("({[]})"))  # True
+#
 
-print("Valid Parentheses:", is_valid_parentheses("({[]})"))  # True
+#Given an array of size n, find the majority element (appears more than n/2 times).
+def majority_element(nums):
+    count = 0
+    candidate = None
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+    return candidate
 
-
+print("Majority Element:", majority_element([2,2,1,1,1,2,2]))  # 2
 
