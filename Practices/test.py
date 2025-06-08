@@ -229,14 +229,22 @@
 
 # A peak element is one that is greater than its neighbors. Return the index of any pe
 
-def find_peak_element(nums):
-    left, right = 0, len(nums) - 1
-    while left < right:
-        mid = (left + right) // 2
-        if nums[mid] < nums[mid + 1]:
-            left = mid + 1
-        else:
-            right = mid
-    return left
+# def find_peak_element(nums):
+#     left, right = 0, len(nums) - 1
+#     while left < right:
+#         mid = (left + right) // 2
+#         if nums[mid] < nums[mid + 1]:
+#             left = mid + 1
+#         else:
+#             right = mid
+#     return left
+#
+# print("Peak Element Index:", find_peak_element([1, 2, 3, 1]))  # 2
+# Top K Frequent Elements
+from collections import Counter
 
-print("Peak Element Index:", find_peak_element([1, 2, 3, 1]))  # 2
+def top_k_frequent(nums, k):
+    count = Counter(nums)
+    return [item for item, freq in count.most_common(k)]
+
+print("Top K Frequent:", top_k_frequent([1,1,1,2,2,3], 2))  # [1, 2]
