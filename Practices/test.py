@@ -250,8 +250,22 @@
 # print("Top K Frequent:", top_k_frequent([1,1,1,2,2,3], 2))  # [1, 2]
 
 # Rotate Matrix (90 degrees)
-def rotate(matrix):
-    return [list(row)[::-1] for row in zip(*matrix)]
+# def rotate(matrix):
+#     return [list(row)[::-1] for row in zip(*matrix)]
+#
+# print("Rotated Matrix:", rotate([[1,2,3],[4,5,6],[7,8,9]]))
 
-print("Rotated Matrix:", rotate([[1,2,3],[4,5,6],[7,8,9]]))
+# Longest Substring Without Repeating Characters
+
+def length_of_longest_substring(s):
+    char_index = {}
+    left = max_len = 0
+    for right, char in enumerate(s):
+        if char in char_index and char_index[char] >= left:
+            left = char_index[char] + 1
+        char_index[char] = right
+        max_len = max(max_len, right - left + 1)
+    return max_len
+
+print("Longest Substring:", length_of_longest_substring("abcabcbb"))  # 3
 
