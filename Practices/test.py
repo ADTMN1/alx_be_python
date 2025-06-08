@@ -215,14 +215,28 @@
 #
 
 #Given an array of size n, find the majority element (appears more than n/2 times).
-def majority_element(nums):
-    count = 0
-    candidate = None
-    for num in nums:
-        if count == 0:
-            candidate = num
-        count += (1 if num == candidate else -1)
-    return candidate
+# def majority_element(nums):
+#     count = 0
+#     candidate = None
+#     for num in nums:
+#         if count == 0:
+#             candidate = num
+#         count += (1 if num == candidate else -1)
+#     return candidate
+#
+# print("Majority Element:", majority_element([2,2,1,1,1,2,2]))  # 2
 
-print("Majority Element:", majority_element([2,2,1,1,1,2,2]))  # 2
 
+# A peak element is one that is greater than its neighbors. Return the index of any pe
+
+def find_peak_element(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+
+print("Peak Element Index:", find_peak_element([1, 2, 3, 1]))  # 2
