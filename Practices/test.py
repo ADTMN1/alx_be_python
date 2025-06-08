@@ -241,10 +241,17 @@
 #
 # print("Peak Element Index:", find_peak_element([1, 2, 3, 1]))  # 2
 # Top K Frequent Elements
-from collections import Counter
+# from collections import Counter
+#
+# def top_k_frequent(nums, k):
+#     count = Counter(nums)
+#     return [item for item, freq in count.most_common(k)]
+#
+# print("Top K Frequent:", top_k_frequent([1,1,1,2,2,3], 2))  # [1, 2]
 
-def top_k_frequent(nums, k):
-    count = Counter(nums)
-    return [item for item, freq in count.most_common(k)]
+# Rotate Matrix (90 degrees)
+def rotate(matrix):
+    return [list(row)[::-1] for row in zip(*matrix)]
 
-print("Top K Frequent:", top_k_frequent([1,1,1,2,2,3], 2))  # [1, 2]
+print("Rotated Matrix:", rotate([[1,2,3],[4,5,6],[7,8,9]]))
+
