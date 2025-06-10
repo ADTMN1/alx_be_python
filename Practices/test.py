@@ -282,14 +282,154 @@
 
 # Isomorphic Strings
 
-def is_isomorphic(s, t):
-    mapping_s_t = {}
-    mapping_t_s = {}
-    for a, b in zip(s, t):
-        if mapping_s_t.get(a, b) != b or mapping_t_s.get(b, a) != a:
-            return False
-        mapping_s_t[a] = b
-        mapping_t_s[b] = a
-    return True
+# def is_isomorphic(s, t):
+#     mapping_s_t = {}
+#     mapping_t_s = {}
+#     for a, b in zip(s, t):
+#         if mapping_s_t.get(a, b) != b or mapping_t_s.get(b, a) != a:
+#             return False
+#         mapping_s_t[a] = b
+#         mapping_t_s[b] = a
+#     return True
+#
+# print("Isomorphic:", is_isomorphic("egg", "add"))  # True
 
-print("Isomorphic:", is_isomorphic("egg", "add"))  # True
+#
+# def knapsack(n, capacity, weights, profits):
+#     # Create DP table
+#     dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+#
+#     # Fill DP table
+#     for i in range(1, n + 1):
+#         for w in range(capacity + 1):
+#             if weights[i - 1] <= w:
+#                 dp[i][w] = max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w])
+#             else:
+#                 dp[i][w] = dp[i - 1][w]
+#
+#     # Find selected items
+#     selected_items = []
+#     w = capacity
+#     for i in range(n, 0, -1):
+#         if dp[i][w] != dp[i - 1][w]:
+#             selected_items.append(i - 1)
+#             w -= weights[i - 1]
+#
+#     return dp[n][capacity], selected_items
+#
+#
+# def main():
+#     # Get input from user
+#     n = int(input("Enter the number of items: "))
+#     capacity = int(input("Enter the knapsack capacity: "))
+#
+#     weights = []
+#     profits = []
+#     print("Enter weight and profit for each item:")
+#     for i in range(n):
+#         w, p = map(int, input(f"Item {i + 1} (weight profit): ").split())
+#         weights.append(w)
+#         profits.append(p)
+#
+#     # Solve knapsack problem
+#     max_profit, selected = knapsack(n, capacity, weights, profits)
+#
+#     # Display results
+#     print("\nMaximum profit:", max_profit)
+#     print("Selected items (index, weight, profit):")
+#     for idx in reversed(selected):  # Reverse to show items in ascending order
+#         print(f"Item {idx + 1}: weight = {weights[idx]}, profit = {profits[idx]}")
+#
+#
+# if __name__ == "__main__":
+#     main()
+
+
+# 0/1 Knapsack Problem Solver
+
+def knapsack_01():
+    print("""
+    Solves the 0/1 Knapsack Problem using dynamic programming.
+    Calculates and displays the maximum achievable profit and the set of selected items.
+    """)
+
+    while True:
+        try:
+            num_items = int(input("Enter the number of items: "))
+            if num_items <= 0:
+                print("Number of items must be positive. Please try again.")
+            else:
+                break
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+
+    weights = []
+    profits = []
+
+    for i in range(num_items):
+        while True:
+            try:
+                weight = int(input(f"Enter weight for item {i+1}: "))
+                if weight <= 0:
+                    print("Weight must be positive. Please try again.")
+                else:
+                    weights.append(weight)
+                    break
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+
+        while True:
+            try:
+                profit = int(input(f"Enter profit for item {i+1}: "))
+                if profit < 0:
+                    print("Profit cannot be negative. Please try again.")
+                else:
+                    profits.append(profit)
+                    break
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+
+    while True:
+        try:
+            capacity = int(input("Enter the knapsack capacity: "))
+            if capacity <= 0:
+                print("Capacity must be positive. Please try again.")
+            else:
+                break
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+
+    dp_table = [[0 for _ in range(capacity + 1)] for _ in range(num_items + 1)]
+
+    for i in range(1, num_items + 1):
+        for w in range(1, capacity + 1):
+            if weights[i-1] <= w:
+                include_item_profit = profits[i-1] + dp_table[i-1][w - weights[i-1]]
+                exclude_item_profit = dp_table[i-1][w]
+                dp_table[i][w] = max(include_item_profit, exclude_item_profit)
+            else:
+                dp_table[i][w] = dp_table[i-1][w]
+
+    max_profit = dp_table[num_items][capacity]
+
+    selected_items = []
+    i = num_items
+    w = capacity
+    while i > 0 and w > 0:
+        if dp_table[i][w] != dp_table[i-1][w]:
+            selected_items.append(f"Item {i} (Weight: {weights[i-1]}, Profit: {profits[i-1]})")
+            w -= weights[i-1]
+        i -= 1
+
+    selected_items.reverse()
+
+    print(f"\nMaximum achievable profit: {max_profit}")
+    if selected_items:
+        print("Selected items:")
+        for item in selected_items:
+            print(f"- {item}")
+    else:
+        print("No items were selected.")
+
+if __name__ == "__main__":
+    knapsack_01()
