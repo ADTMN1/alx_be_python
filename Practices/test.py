@@ -271,10 +271,25 @@
 #
 
 # Climbing Stairs
-def climb_stairs(n):
-    a, b = 1, 1
-    for _ in range(n-1):
-        a, b = b, a + b
-    return b
+# def climb_stairs(n):
+#     a, b = 1, 1
+#     for _ in range(n-1):
+#         a, b = b, a + b
+#     return b
+#
+# print("Climb Stairs (n=5):", climb_stairs(5))  # 8
 
-print("Climb Stairs (n=5):", climb_stairs(5))  # 8
+
+# Isomorphic Strings
+
+def is_isomorphic(s, t):
+    mapping_s_t = {}
+    mapping_t_s = {}
+    for a, b in zip(s, t):
+        if mapping_s_t.get(a, b) != b or mapping_t_s.get(b, a) != a:
+            return False
+        mapping_s_t[a] = b
+        mapping_t_s[b] = a
+    return True
+
+print("Isomorphic:", is_isomorphic("egg", "add"))  # True
