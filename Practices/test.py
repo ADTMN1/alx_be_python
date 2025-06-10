@@ -257,15 +257,24 @@
 
 # Longest Substring Without Repeating Characters
 
-def length_of_longest_substring(s):
-    char_index = {}
-    left = max_len = 0
-    for right, char in enumerate(s):
-        if char in char_index and char_index[char] >= left:
-            left = char_index[char] + 1
-        char_index[char] = right
-        max_len = max(max_len, right - left + 1)
-    return max_len
+# def length_of_longest_substring(s):
+#     char_index = {}
+#     left = max_len = 0
+#     for right, char in enumerate(s):
+#         if char in char_index and char_index[char] >= left:
+#             left = char_index[char] + 1
+#         char_index[char] = right
+#         max_len = max(max_len, right - left + 1)
+#     return max_len
+#
+# print("Longest Substring:", length_of_longest_substring("abcabcbb"))  # 3
+#
 
-print("Longest Substring:", length_of_longest_substring("abcabcbb"))  # 3
+# Climbing Stairs
+def climb_stairs(n):
+    a, b = 1, 1
+    for _ in range(n-1):
+        a, b = b, a + b
+    return b
 
+print("Climb Stairs (n=5):", climb_stairs(5))  # 8
