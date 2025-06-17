@@ -473,21 +473,47 @@
 # Given a string s, find the length of the longest substring without repeating characters.
 
 
-def lengthOfLongestSubstring(s):
-    char_set = set()
-    left = 0
-    max_len = 0
+# def lengthOfLongestSubstring(s):
+#     char_set = set()
+#     left = 0
+#     max_len = 0
+#
+#     for right in range(len(s)):
+#         while s[right] in char_set:
+#             char_set.remove(s[left])
+#             left += 1
+#
+#         char_set.add(s[right])
+#         max_len = max(max_len, right - left + 1)
+#
+#     return max_len
+#
+# # Example test
+# print(lengthOfLongestSubstring("abcabcbb"))
+#
 
-    for right in range(len(s)):
-        while s[right] in char_set:
-            char_set.remove(s[left])
-            left += 1
+# 7. Course Schedule
+from typing import List
+from collections import defaultdict, deque
 
-        char_set.add(s[right])
-        max_len = max(max_len, right - left + 1)
+def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
+    graph = defaultdict(list)
+    indegree = [0] * numCourses
+    for dest, src in prerequisites:
+        graph[src].append(dest)
+        indegree[dest] += 1
 
-    return max_len
+    queue = deque([i for i in range(numCourses) if indegree[i] == 0])
+    visited = 0
 
-# Example test
-print(lengthOfLongestSubstring("abcabcbb"))
+    while queue:
+        node = queue.popleft()
+        visited += 1
+        for neighbor in graph[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
 
+    return visited == numCourses
+
+print("7. Can Finish Courses:", canFinish(2, [[1, 0]]))
