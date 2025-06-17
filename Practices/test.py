@@ -435,37 +435,59 @@
 #     knapsack_01()
 
 # Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that:
-def threeSum(nums):
-    nums.sort()
-    res = []
+# def threeSum(nums):
+#     nums.sort()
+#     res = []
+#
+#     for i in range(len(nums) - 2):
+#         # Skip duplicates
+#         if i > 0 and nums[i] == nums[i - 1]:
+#             continue
+#
+#         left, right = i + 1, len(nums) - 1
+#
+#         while left < right:
+#             s = nums[i] + nums[left] + nums[right]
+#
+#             if s < 0:
+#                 left += 1
+#             elif s > 0:
+#                 right -= 1
+#             else:
+#                 res.append([nums[i], nums[left], nums[right]])
+#
+#                 # Skip duplicates
+#                 while left < right and nums[left] == nums[left + 1]:
+#                     left += 1
+#                 while left < right and nums[right] == nums[right - 1]:
+#                     right -= 1
+#
+#                 left += 1
+#                 right -= 1
+#
+#     return res
+#
+# # Now this is outside the function
+# print(threeSum([-1, 0, 1, 2, -1, -4]))
 
-    for i in range(len(nums) - 2):
-        # Skip duplicates
-        if i > 0 and nums[i] == nums[i - 1]:
-            continue
+# Given a string s, find the length of the longest substring without repeating characters.
 
-        left, right = i + 1, len(nums) - 1
 
-        while left < right:
-            s = nums[i] + nums[left] + nums[right]
+def lengthOfLongestSubstring(s):
+    char_set = set()
+    left = 0
+    max_len = 0
 
-            if s < 0:
-                left += 1
-            elif s > 0:
-                right -= 1
-            else:
-                res.append([nums[i], nums[left], nums[right]])
+    for right in range(len(s)):
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
 
-                # Skip duplicates
-                while left < right and nums[left] == nums[left + 1]:
-                    left += 1
-                while left < right and nums[right] == nums[right - 1]:
-                    right -= 1
+        char_set.add(s[right])
+        max_len = max(max_len, right - left + 1)
 
-                left += 1
-                right -= 1
+    return max_len
 
-    return res
+# Example test
+print(lengthOfLongestSubstring("abcabcbb"))
 
-# Now this is outside the function
-print(threeSum([-1, 0, 1, 2, -1, -4]))
