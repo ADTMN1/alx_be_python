@@ -493,27 +493,46 @@
 #
 
 # 7. Course Schedule
+# from typing import List
+# from collections import defaultdict, deque
+#
+# def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
+#     graph = defaultdict(list)
+#     indegree = [0] * numCourses
+#     for dest, src in prerequisites:
+#         graph[src].append(dest)
+#         indegree[dest] += 1
+#
+#     queue = deque([i for i in range(numCourses) if indegree[i] == 0])
+#     visited = 0
+#
+#     while queue:
+#         node = queue.popleft()
+#         visited += 1
+#         for neighbor in graph[node]:
+#             indegree[neighbor] -= 1
+#             if indegree[neighbor] == 0:
+#                 queue.append(neighbor)
+#
+#     return visited == numCourses
+#
+# print("7. Can Finish Courses:", canFinish(2, [[1, 0]]))
+
+
+# 9. Word Break
 from typing import List
-from collections import defaultdict, deque
 
-def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
-    graph = defaultdict(list)
-    indegree = [0] * numCourses
-    for dest, src in prerequisites:
-        graph[src].append(dest)
-        indegree[dest] += 1
+def wordBreak(s: str, wordDict: List[str]) -> bool:
+    word_set = set(wordDict)
+    dp = [False] * (len(s) + 1)
+    dp[0] = True  # base case: empty string can be segmented
 
-    queue = deque([i for i in range(numCourses) if indegree[i] == 0])
-    visited = 0
+    for i in range(1, len(s) + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word_set:
+                dp[i] = True
+                break
 
-    while queue:
-        node = queue.popleft()
-        visited += 1
-        for neighbor in graph[node]:
-            indegree[neighbor] -= 1
-            if indegree[neighbor] == 0:
-                queue.append(neighbor)
+    return dp[-1]
 
-    return visited == numCourses
-
-print("7. Can Finish Courses:", canFinish(2, [[1, 0]]))
+print("9. Word Break:", wordBreak("leetcode", ["leet", "code"]))
