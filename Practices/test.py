@@ -520,19 +520,37 @@
 
 
 # 9. Word Break
+# from typing import List
+#
+# def wordBreak(s: str, wordDict: List[str]) -> bool:
+#     word_set = set(wordDict)
+#     dp = [False] * (len(s) + 1)
+#     dp[0] = True  # base case: empty string can be segmented
+#
+#     for i in range(1, len(s) + 1):
+#         for j in range(i):
+#             if dp[j] and s[j:i] in word_set:
+#                 dp[i] = True
+#                 break
+#
+#     return dp[-1]
+#
+# print("9. Word Break:", wordBreak("leetcode", ["leet", "code"]))
+
+
 from typing import List
+from collections import defaultdict
 
-def wordBreak(s: str, wordDict: List[str]) -> bool:
-    word_set = set(wordDict)
-    dp = [False] * (len(s) + 1)
-    dp[0] = True  # base case: empty string can be segmented
+def subarraySum(nums: List[int], k: int) -> int:
+    count = 0
+    curr_sum = 0
+    prefix_sums = defaultdict(int)
+    prefix_sums[0] = 1
+    for num in nums:
+        curr_sum += num
+        count += prefix_sums.get(curr_sum - k, 0)
+        prefix_sums[curr_sum] += 1
+    return count
 
-    for i in range(1, len(s) + 1):
-        for j in range(i):
-            if dp[j] and s[j:i] in word_set:
-                dp[i] = True
-                break
-
-    return dp[-1]
-
-print("9. Word Break:", wordBreak("leetcode", ["leet", "code"]))
+# Example usage
+print("8. Subarray Sum Equals K:", subarraySum([1, 2, 3], 3))  # Output should be 2
