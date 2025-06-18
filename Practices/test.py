@@ -537,20 +537,58 @@
 #
 # print("9. Word Break:", wordBreak("leetcode", ["leet", "code"]))
 
+# 8. Subarray Sum Equals K
+# from typing import List
+# from collections import defaultdict
+#
+# def subarraySum(nums: List[int], k: int) -> int:
+#     count = 0
+#     curr_sum = 0
+#     prefix_sums = defaultdict(int)
+#     prefix_sums[0] = 1
+#     for num in nums:
+#         curr_sum += num
+#         count += prefix_sums.get(curr_sum - k, 0)
+#         prefix_sums[curr_sum] += 1
+#     return count
+#
+# # Example usage
+# print("8. Subarray Sum Equals K:", subarraySum([1, 2, 3], 3))  # Output should be 2
 
-from typing import List
-from collections import defaultdict
 
-def subarraySum(nums: List[int], k: int) -> int:
-    count = 0
-    curr_sum = 0
-    prefix_sums = defaultdict(int)
-    prefix_sums[0] = 1
-    for num in nums:
-        curr_sum += num
-        count += prefix_sums.get(curr_sum - k, 0)
-        prefix_sums[curr_sum] += 1
-    return count
+# Helper to print linked list
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-# Example usage
-print("8. Subarray Sum Equals K:", subarraySum([1, 2, 3], 3))  # Output should be 2
+def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:
+    dummy = ListNode()
+    current = dummy
+    carry = 0
+
+    while l1 or l2 or carry:
+        val1 = l1.val if l1 else 0
+        val2 = l2.val if l2 else 0
+
+        total = val1 + val2 + carry
+        carry = total // 10
+        current.next = ListNode(total % 10)
+
+        current = current.next
+        if l1: l1 = l1.next
+        if l2: l2 = l2.next
+
+    return dummy.next
+
+def print_linked_list(node):
+    res = []
+    while node:
+        res.append(node.val)
+        node = node.next
+    return res
+
+# Test
+l1 = ListNode(2, ListNode(4, ListNode(3)))
+l2 = ListNode(5, ListNode(6, ListNode(4)))
+print("3. Add Two Numbers:", print_linked_list(addTwoNumbers(l1, l2)))  # Output: [7, 0, 8]
