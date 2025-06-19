@@ -557,38 +557,68 @@
 
 
 # Helper to print linked list
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+# def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:
+#     dummy = ListNode()
+#     current = dummy
+#     carry = 0
+#
+#     while l1 or l2 or carry:
+#         val1 = l1.val if l1 else 0
+#         val2 = l2.val if l2 else 0
+#
+#         total = val1 + val2 + carry
+#         carry = total // 10
+#         current.next = ListNode(total % 10)
+#
+#         current = current.next
+#         if l1: l1 = l1.next
+#         if l2: l2 = l2.next
+#
+#     return dummy.next
+#
+# def print_linked_list(node):
+#     res = []
+#     while node:
+#         res.append(node.val)
+#         node = node.next
+#     return res
+#
+# # Test
+# l1 = ListNode(2, ListNode(4, ListNode(3)))
+# l2 = ListNode(5, ListNode(6, ListNode(4)))
+# print("3. Add Two Numbers:", print_linked_list(addTwoNumbers(l1, l2)))  # Output: [7, 0, 8]
 
-def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:
-    dummy = ListNode()
-    current = dummy
-    carry = 0
+# 1. 3Sum
+from typing import List
 
-    while l1 or l2 or carry:
-        val1 = l1.val if l1 else 0
-        val2 = l2.val if l2 else 0
 
-        total = val1 + val2 + carry
-        carry = total // 10
-        current.next = ListNode(total % 10)
-
-        current = current.next
-        if l1: l1 = l1.next
-        if l2: l2 = l2.next
-
-    return dummy.next
-
-def print_linked_list(node):
+def threeSum(nums: List[int]) -> List[List[int]]:
+    nums.sort()
     res = []
-    while node:
-        res.append(node.val)
-        node = node.next
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        left, right = i + 1, len(nums) - 1
+        while left < right:
+            s = nums[i] + nums[left] + nums[right]
+            if s < 0:
+                left += 1
+            elif s > 0:
+                right -= 1
+            else:
+                res.append([nums[i], nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                left += 1
+                right -= 1
     return res
 
-# Test
-l1 = ListNode(2, ListNode(4, ListNode(3)))
-l2 = ListNode(5, ListNode(6, ListNode(4)))
-print("3. Add Two Numbers:", print_linked_list(addTwoNumbers(l1, l2)))  # Output: [7, 0, 8]
+
+print("1. 3Sum:", threeSum([-1, 0, 1, 2, -1, -4]))
