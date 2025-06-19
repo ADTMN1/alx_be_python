@@ -594,31 +594,49 @@
 # print("3. Add Two Numbers:", print_linked_list(addTwoNumbers(l1, l2)))  # Output: [7, 0, 8]
 
 # 1. 3Sum
+# from typing import List
+#
+#
+# def threeSum(nums: List[int]) -> List[List[int]]:
+#     nums.sort()
+#     res = []
+#     for i in range(len(nums) - 2):
+#         if i > 0 and nums[i] == nums[i - 1]:
+#             continue
+#         left, right = i + 1, len(nums) - 1
+#         while left < right:
+#             s = nums[i] + nums[left] + nums[right]
+#             if s < 0:
+#                 left += 1
+#             elif s > 0:
+#                 right -= 1
+#             else:
+#                 res.append([nums[i], nums[left], nums[right]])
+#                 while left < right and nums[left] == nums[left + 1]:
+#                     left += 1
+#                 while left < right and nums[right] == nums[right - 1]:
+#                     right -= 1
+#                 left += 1
+#                 right -= 1
+#     return res
+#
+#
+# print("1. 3Sum:", threeSum([-1, 0, 1, 2, -1, -4]))
+
 from typing import List
 
-
-def threeSum(nums: List[int]) -> List[List[int]]:
-    nums.sort()
+def spiralOrder(matrix: List[List[int]]) -> List[int]:
     res = []
-    for i in range(len(nums) - 2):
-        if i > 0 and nums[i] == nums[i - 1]:
-            continue
-        left, right = i + 1, len(nums) - 1
-        while left < right:
-            s = nums[i] + nums[left] + nums[right]
-            if s < 0:
-                left += 1
-            elif s > 0:
-                right -= 1
-            else:
-                res.append([nums[i], nums[left], nums[right]])
-                while left < right and nums[left] == nums[left + 1]:
-                    left += 1
-                while left < right and nums[right] == nums[right - 1]:
-                    right -= 1
-                left += 1
-                right -= 1
+    while matrix:
+        res += matrix.pop(0)
+        if matrix and matrix[0]:
+            for row in matrix:
+                res.append(row.pop())
+        if matrix:
+            res += matrix.pop()[::-1]
+        if matrix and matrix[0]:
+            for row in matrix[::-1]:
+                res.append(row.pop(0))
     return res
 
-
-print("1. 3Sum:", threeSum([-1, 0, 1, 2, -1, -4]))
+print("1. Spiral Matrix:", spiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
