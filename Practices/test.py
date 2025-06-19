@@ -641,13 +641,28 @@
 #
 # print("1. Spiral Matrix:", spiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
 
-from typing import List
-def canJump(nums: List[int]) -> bool:
-    max_reach = 0
-    for i, num in enumerate(nums):
-        if i > max_reach:
-            return False
-        max_reach = max(max_reach, i + num)
-    return True
+# from typing import List
+# def canJump(nums: List[int]) -> bool:
+#     max_reach = 0
+#     for i, num in enumerate(nums):
+#         if i > max_reach:
+#             return False
+#         max_reach = max(max_reach, i + num)
+#     return True
+#
+# print("5. Jump Game:", canJump([2,3,1,1,4]))
 
-print("5. Jump Game:", canJump([2,3,1,1,4]))
+def numDecodings(s: str) -> int:
+    if not s or s[0] == '0':
+        return 0
+    dp = [1, 1]
+    for i in range(1, len(s)):
+        count = 0
+        if s[i] != '0':
+            count += dp[-1]
+        if 10 <= int(s[i-1:i+1]) <= 26:
+            count += dp[-2]
+        dp.append(count)
+    return dp[-1]
+
+print("4. Decode Ways:", numDecodings("226"))
