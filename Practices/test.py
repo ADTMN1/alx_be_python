@@ -652,17 +652,36 @@
 #
 # print("5. Jump Game:", canJump([2,3,1,1,4]))
 
-def numDecodings(s: str) -> int:
-    if not s or s[0] == '0':
-        return 0
-    dp = [1, 1]
-    for i in range(1, len(s)):
-        count = 0
-        if s[i] != '0':
-            count += dp[-1]
-        if 10 <= int(s[i-1:i+1]) <= 26:
-            count += dp[-2]
-        dp.append(count)
-    return dp[-1]
+# def numDecodings(s: str) -> int:
+#     if not s or s[0] == '0':
+#         return 0
+#     dp = [1, 1]
+#     for i in range(1, len(s)):
+#         count = 0
+#         if s[i] != '0':
+#             count += dp[-1]
+#         if 10 <= int(s[i-1:i+1]) <= 26:
+#             count += dp[-2]
+#         dp.append(count)
+#     return dp[-1]
+#
+# print("4. Decode Ways:", numDecodings("226"))
+from typing import List
+def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+    result = []
 
-print("4. Decode Ways:", numDecodings("226"))
+    def backtrack(remaining, combo, start):
+        if remaining == 0:
+            result.append(list(combo))
+            return
+        elif remaining < 0:
+            return
+        for i in range(start, len(candidates)):
+            combo.append(candidates[i])
+            backtrack(remaining - candidates[i], combo, i)
+            combo.pop()
+
+    backtrack(target, [], 0)
+    return result
+
+print("Combination Sum:", combinationSum([2, 3, 6, 7], 7))
