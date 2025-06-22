@@ -11,3 +11,11 @@ def perform_operation(num1: float, num2: float, operation: str):
         return num1 / num2
     else:
         return "Error: Invalid operation"
+
+# Simple test block
+if __name__ == "__main__":
+    print("Test Mode: Arithmetic Operations")
+    print("5 + 3 =", perform_operation(5, 3, "add"))
+    print("5 - 3 =", perform_operation(5, 3, "subtract"))
+    print("5 * 3 =", perform_operation(5, 3, "multiply"))
+    print("5 / 0 =", perform_operation(5, 0, "divide"))
