@@ -666,22 +666,40 @@
 #     return dp[-1]
 #
 # print("4. Decode Ways:", numDecodings("226"))
+# from typing import List
+# def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+#     result = []
+#
+#     def backtrack(remaining, combo, start):
+#         if remaining == 0:
+#             result.append(list(combo))
+#             return
+#         elif remaining < 0:
+#             return
+#         for i in range(start, len(candidates)):
+#             combo.append(candidates[i])
+#             backtrack(remaining - candidates[i], combo, i)
+#             combo.pop()
+#
+#     backtrack(target, [], 0)
+#     return result
+#
+# print("Combination Sum:", combinationSum([2, 3, 6, 7], 7))
+
 from typing import List
-def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+def permute(nums: List[int]) -> List[List[int]]:
     result = []
 
-    def backtrack(remaining, combo, start):
-        if remaining == 0:
-            result.append(list(combo))
+    def backtrack(start):
+        if start == len(nums):
+            result.append(nums[:])
             return
-        elif remaining < 0:
-            return
-        for i in range(start, len(candidates)):
-            combo.append(candidates[i])
-            backtrack(remaining - candidates[i], combo, i)
-            combo.pop()
+        for i in range(start, len(nums)):
+            nums[start], nums[i] = nums[i], nums[start]
+            backtrack(start + 1)
+            nums[start], nums[i] = nums[i], nums[start]
 
-    backtrack(target, [], 0)
+    backtrack(0)
     return result
 
-print("Combination Sum:", combinationSum([2, 3, 6, 7], 7))
+print("Permutations:", permute([1, 2, 3]))
