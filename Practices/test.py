@@ -686,20 +686,33 @@
 #
 # print("Combination Sum:", combinationSum([2, 3, 6, 7], 7))
 
-from typing import List
-def permute(nums: List[int]) -> List[List[int]]:
-    result = []
+# from typing import List
+# def permute(nums: List[int]) -> List[List[int]]:
+#     result = []
+#
+#     def backtrack(start):
+#         if start == len(nums):
+#             result.append(nums[:])
+#             return
+#         for i in range(start, len(nums)):
+#             nums[start], nums[i] = nums[i], nums[start]
+#             backtrack(start + 1)
+#             nums[start], nums[i] = nums[i], nums[start]
+#
+#     backtrack(0)
+#     return result
+#
+# print("Permutations:", permute([1, 2, 3]))
 
-    def backtrack(start):
-        if start == len(nums):
-            result.append(nums[:])
-            return
-        for i in range(start, len(nums)):
-            nums[start], nums[i] = nums[i], nums[start]
-            backtrack(start + 1)
-            nums[start], nums[i] = nums[i], nums[start]
 
-    backtrack(0)
-    return result
+def find_maximum(a, b, c):
+    print(f"Comparing values: {a}, {b}, {c}")
+    if a >= b and a >= c:
+        return a
+    elif b >= a and b >= c:
+        return b
+    else:
+        return c
 
-print("Permutations:", permute([1, 2, 3]))
+# Example
+print("Maximum is:", find_maximum(3, 7, 5))
