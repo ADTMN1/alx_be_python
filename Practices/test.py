@@ -738,16 +738,28 @@
 #     print(f"{number} is not a palindrome.")
 
 
-def count_vowels(text):
-    print(f"Input text: '{text}'")
-    vowels = "aeiouAEIOU"
-    count = 0
-    for char in text:
-        if char in vowels:
-            count += 1
-            print(f"Found vowel: {char}")
-    return count
+# def count_vowels(text):
+#     print(f"Input text: '{text}'")
+#     vowels = "aeiouAEIOU"
+#     count = 0
+#     for char in text:
+#         if char in vowels:
+#             count += 1
+#             print(f"Found vowel: {char}")
+#     return count
+#
+# # Example usage
+# text = "Hello, Python is Awesome!"
+# print(f"Vowel count: {count_vowels(text)}")
+
+def convert_seconds(seconds):
+    print(f"Total seconds: {seconds}")
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    remaining_seconds = seconds % 60
+    print(f"Hours: {hours}, Minutes: {minutes}, Seconds: {remaining_seconds}")
+    return f"{hours:02}:{minutes:02}:{remaining_seconds:02}"
 
 # Example usage
-text = "Hello, Python is Awesome!"
-print(f"Vowel count: {count_vowels(text)}")
+seconds_input = 3665
+print(f"Time: {convert_seconds(seconds_input)}")
