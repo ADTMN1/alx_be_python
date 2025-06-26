@@ -717,22 +717,37 @@
 # # Example
 # print("Maximum is:", find_maximum(3, 7, 5))
 
+#
+# def is_palindrome_number(num):
+#     print(f"Checking if {num} is a palindrome.")
+#     original = str(num)
+#     reversed_num = original[::-1]
+#     print(f"Original: {original}, Reversed: {reversed_num}")
+#
+#     if original == reversed_num:
+#         return True
+#     else:
+#         return False
+#
+#
+# # Example usage
+# number = 12321
+# if is_palindrome_number(number):
+#     print(f"{number} is a palindrome.")
+# else:
+#     print(f"{number} is not a palindrome.")
 
-def is_palindrome_number(num):
-    print(f"Checking if {num} is a palindrome.")
-    original = str(num)
-    reversed_num = original[::-1]
-    print(f"Original: {original}, Reversed: {reversed_num}")
 
-    if original == reversed_num:
-        return True
-    else:
-        return False
-
+def count_vowels(text):
+    print(f"Input text: '{text}'")
+    vowels = "aeiouAEIOU"
+    count = 0
+    for char in text:
+        if char in vowels:
+            count += 1
+            print(f"Found vowel: {char}")
+    return count
 
 # Example usage
-number = 12321
-if is_palindrome_number(number):
-    print(f"{number} is a palindrome.")
-else:
-    print(f"{number} is not a palindrome.")
+text = "Hello, Python is Awesome!"
+print(f"Vowel count: {count_vowels(text)}")
