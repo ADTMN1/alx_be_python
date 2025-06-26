@@ -705,14 +705,34 @@
 # print("Permutations:", permute([1, 2, 3]))
 
 
-def find_maximum(a, b, c):
-    print(f"Comparing values: {a}, {b}, {c}")
-    if a >= b and a >= c:
-        return a
-    elif b >= a and b >= c:
-        return b
-    else:
-        return c
+# def find_maximum(a, b, c):
+#     print(f"Comparing values: {a}, {b}, {c}")
+#     if a >= b and a >= c:
+#         return a
+#     elif b >= a and b >= c:
+#         return b
+#     else:
+#         return c
+#
+# # Example
+# print("Maximum is:", find_maximum(3, 7, 5))
 
-# Example
-print("Maximum is:", find_maximum(3, 7, 5))
+
+def is_palindrome_number(num):
+    print(f"Checking if {num} is a palindrome.")
+    original = str(num)
+    reversed_num = original[::-1]
+    print(f"Original: {original}, Reversed: {reversed_num}")
+
+    if original == reversed_num:
+        return True
+    else:
+        return False
+
+
+# Example usage
+number = 12321
+if is_palindrome_number(number):
+    print(f"{number} is a palindrome.")
+else:
+    print(f"{number} is not a palindrome.")
