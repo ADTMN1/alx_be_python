@@ -764,17 +764,27 @@
 # seconds_input = 3665
 # print(f"Time: {convert_seconds(seconds_input)}")
 
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+# def is_prime(n):
+#     if n <= 1:
+#         return False
+#     for i in range(2, int(n**0.5) + 1):
+#         if n % i == 0:
+#             return False
+#     return True
+#
+# # Example usage
+# num = 29
+# if is_prime(num):
+#     print(f"{num} is a prime number.")
+# else:
+#     print(f"{num} is not a prime number.")
+
+
+def reverse_words(sentence):
+    words = sentence.split()
+    reversed_sentence = " ".join(reversed(words))
+    return reversed_sentence
 
 # Example usage
-num = 29
-if is_prime(num):
-    print(f"{num} is a prime number.")
-else:
-    print(f"{num} is not a prime number.")
+text = "Python is fun"
+print(reverse_words(text))
