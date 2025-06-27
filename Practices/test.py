@@ -752,14 +752,29 @@
 # text = "Hello, Python is Awesome!"
 # print(f"Vowel count: {count_vowels(text)}")
 
-def convert_seconds(seconds):
-    print(f"Total seconds: {seconds}")
-    hours = seconds // 3600
-    minutes = (seconds % 3600) // 60
-    remaining_seconds = seconds % 60
-    print(f"Hours: {hours}, Minutes: {minutes}, Seconds: {remaining_seconds}")
-    return f"{hours:02}:{minutes:02}:{remaining_seconds:02}"
+# def convert_seconds(seconds):
+#     print(f"Total seconds: {seconds}")
+#     hours = seconds // 3600
+#     minutes = (seconds % 3600) // 60
+#     remaining_seconds = seconds % 60
+#     print(f"Hours: {hours}, Minutes: {minutes}, Seconds: {remaining_seconds}")
+#     return f"{hours:02}:{minutes:02}:{remaining_seconds:02}"
+#
+# # Example usage
+# seconds_input = 3665
+# print(f"Time: {convert_seconds(seconds_input)}")
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
 # Example usage
-seconds_input = 3665
-print(f"Time: {convert_seconds(seconds_input)}")
+num = 29
+if is_prime(num):
+    print(f"{num} is a prime number.")
+else:
+    print(f"{num} is not a prime number.")
