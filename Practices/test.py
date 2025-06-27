@@ -780,11 +780,24 @@
 #     print(f"{num} is not a prime number.")
 
 
-def reverse_words(sentence):
-    words = sentence.split()
-    reversed_sentence = " ".join(reversed(words))
-    return reversed_sentence
+# def reverse_words(sentence):
+#     words = sentence.split()
+#     reversed_sentence = " ".join(reversed(words))
+#     return reversed_sentence
+#
+# # Example usage
+# text = "Python is fun"
+# print(reverse_words(text))
+
+def remove_duplicates(lst):
+    seen = set()
+    result = []
+    for item in lst:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
 
 # Example usage
-text = "Python is fun"
-print(reverse_words(text))
+nums = [1, 2, 2, 3, 4, 3, 5]
+print(remove_duplicates(nums))
