@@ -789,15 +789,26 @@
 # text = "Python is fun"
 # print(reverse_words(text))
 
-def remove_duplicates(lst):
-    seen = set()
-    result = []
-    for item in lst:
-        if item not in seen:
-            seen.add(item)
-            result.append(item)
-    return result
+# def remove_duplicates(lst):
+#     seen = set()
+#     result = []
+#     for item in lst:
+#         if item not in seen:
+#             seen.add(item)
+#             result.append(item)
+#     return result
+#
+# # Example usage
+# nums = [1, 2, 2, 3, 4, 3, 5]
+# print(remove_duplicates(nums))
+
+def fibonacci(n):
+    sequence = []
+    a, b = 0, 1
+    for _ in range(n):
+        sequence.append(a)
+        a, b = b, a + b
+    return sequence
 
 # Example usage
-nums = [1, 2, 2, 3, 4, 3, 5]
-print(remove_duplicates(nums))
+print(fibonacci(7))  # [0, 1, 1, 2, 3, 5, 8]
