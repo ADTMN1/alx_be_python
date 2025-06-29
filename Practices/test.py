@@ -802,13 +802,20 @@
 # nums = [1, 2, 2, 3, 4, 3, 5]
 # print(remove_duplicates(nums))
 
-def fibonacci(n):
-    sequence = []
-    a, b = 0, 1
-    for _ in range(n):
-        sequence.append(a)
-        a, b = b, a + b
-    return sequence
+# def fibonacci(n):
+#     sequence = []
+#     a, b = 0, 1
+#     for _ in range(n):
+#         sequence.append(a)
+#         a, b = b, a + b
+#     return sequence
+#
+# # Example usage
+# print(fibonacci(7))  # [0, 1, 1, 2, 3, 5, 8]
+
+
+def find_divisors(n):
+    return [i for i in range(1, n+1) if n % i == 0]
 
 # Example usage
-print(fibonacci(7))  # [0, 1, 1, 2, 3, 5, 8]
+print(find_divisors(12))  # [1, 2, 3, 4, 6, 12]
